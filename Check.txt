@@ -1,0 +1,16 @@
+        CASH RECEIPT
+      SUPERMARKET 123
+  12, MILKYWAY, Galaxy/ Earth
+     Tel :123-456-7890
+CASHIER: №1520 DATE: 16/12/2022
+               TIME: 05:22:07
+___________________________
+QTY DESCRIPTION  PRICE  TOTAL
+ 5  Tea          $0,80  $4,00 
+ 5  Meat         $2,00  $10,00 
+ 1  Black hat    $10,00  $9,00 
+discount: 10%
+ 4  T-shirt      $3,00  $12,00 
+Card №1234, card discount = 5%
+Total discount:         $1,75
+TOTAL:                  $35,00
