@@ -1,6 +1,15 @@
+package parser;
+
+import check.Check;
+import check.CheckLine;
+import model.BaseOfCard;
+import model.BaseOfProduct;
+import model.DiscountCard;
+import model.Product;
+
 
 public class CommandLineParser {
-    public static void parse(String[] args, Check check,BaseOfProduct baseOfProduct, BaseOfCard baseOfCard) {
+    public static void parse(String[] args, Check check, BaseOfProduct baseOfProduct, BaseOfCard baseOfCard) {
         for (String arg : args) {
             if (arg.contains("card")) {
                 int cardNumber = Integer.parseInt(arg.replace("card-",""));

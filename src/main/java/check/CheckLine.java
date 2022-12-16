@@ -1,3 +1,7 @@
+package check;
+
+import model.Product;
+
 public class CheckLine {
     private Product product;
     private int productQuantity;
@@ -30,10 +34,10 @@ public class CheckLine {
 
     @Override
     public String toString() {
-        String returnSting = String.format(" %d  %-12s $%.2f  $%.2f \n",productQuantity,product.getDescription(),price,total);
+        String returnSting = String.format(" %d  %-12s $%.2f  $%.2f ",productQuantity,product.getDescription(),price,total);
         if (amountOfDiscount != 0) {
-            returnSting = returnSting + String.format("discount: %.0f",amountOfDiscount);
-            returnSting = returnSting + "%\n";
+            returnSting = returnSting + String.format("\ndiscount: %.0f",amountOfDiscount);
+            returnSting = returnSting + "%";
         }
         return returnSting;
     }

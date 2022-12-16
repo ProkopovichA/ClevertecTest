@@ -1,4 +1,9 @@
-public class ClothingProductBuilder implements Builder {
+package model_builder;
+
+import model.Product;
+import model.ClothingProduct;
+
+public class ClothingProductBuilder implements ProductBuilder {
     private String description;
     private int id;
     private double price;
@@ -24,7 +29,7 @@ public class ClothingProductBuilder implements Builder {
         this.isDiscount = discount;
     }
 
-    public Product getResult() {
+    public Product buildProduct() {
         return new ClothingProduct(description, id, price, isDiscount);
     }
 }

@@ -1,4 +1,10 @@
-public class FoodProductBuilder implements Builder {
+package model_builder;
+
+
+import model.FoodProduct;
+import model.Product;
+
+public class FoodProductBuilder implements ProductBuilder {
     private String description;
     private int id;
     private double price;
@@ -23,7 +29,7 @@ public class FoodProductBuilder implements Builder {
         this.isDiscount = discount;
     }
 
-    public Product getResult() {
+    public Product buildProduct() {
         return new FoodProduct(description, id, price, isDiscount);
     }
 }
