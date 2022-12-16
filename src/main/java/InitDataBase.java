@@ -1,7 +1,10 @@
 public class InitDataBase {
     public static void Init(BaseOfCard baseOfCard, BaseOfProduct baseOfProduct) {
-        FoodProductBuilder foodProductBuilder = new FoodProductBuilder();
 
+        DataBaseWorker.DataRead("BaseOfCard","BaseOfProduct",baseOfCard,baseOfProduct);
+
+
+        FoodProductBuilder foodProductBuilder = new FoodProductBuilder();
         foodProductBuilder.setId(baseOfProduct.getFreeId());
         foodProductBuilder.setDescription("Milk");
         foodProductBuilder.setPrice(1.2);
@@ -67,8 +70,8 @@ public class InitDataBase {
             baseOfCard.addCard(new DiscountCard(i));
         }
 
-//        baseOfProduct.printBase();
 //        baseOfCard.printBase();
+//        baseOfProduct.printBase();
 
     }
 }

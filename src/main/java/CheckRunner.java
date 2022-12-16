@@ -8,6 +8,9 @@ public class CheckRunner {
         check.calculate();
         check.printCheck();
         check.saveCheckToFile("Check.txt");
+        DataBaseWorker.DataWrite("BaseOfCard","BaseOfProduct",baseOfCard,baseOfProduct);
+
+
     }
 
 

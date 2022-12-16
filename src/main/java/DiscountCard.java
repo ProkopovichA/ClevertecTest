@@ -1,4 +1,6 @@
-public class DiscountCard {
+import java.io.Serializable;
+
+public class DiscountCard implements Serializable {
 
     private int cardNumber;
     private int cardDiscount;

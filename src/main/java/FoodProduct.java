@@ -1,4 +1,6 @@
-public class FoodProduct extends Product {
+import java.io.Serializable;
+
+public class FoodProduct extends Product implements Serializable {
     private int goodsWeight;
 
     public FoodProduct(String description, int id, double price, boolean discount) {

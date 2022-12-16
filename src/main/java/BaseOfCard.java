@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class BaseOfCard {
+public class BaseOfCard implements Iterator {
     private List<DiscountCard> discountCards;
+    private int indexOfBase;
 
     public BaseOfCard() {
         this.discountCards = new ArrayList<>();
@@ -31,4 +33,17 @@ public class BaseOfCard {
         }
     }
 
+    @Override
+    public boolean hasNext() {
+        return (indexOfBase < discountCards.size());
+    }
+
+    @Override
+    public DiscountCard next() {
+        return discountCards.get(indexOfBase++);
+    }
+
+    public void initIndexOfBase() {
+        indexOfBase = 0;
+    }
 }
