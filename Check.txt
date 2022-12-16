@@ -3,7 +3,7 @@
   12, MILKYWAY, Galaxy/ Earth
      Tel :123-456-7890
 CASHIER: №1520 DATE: 16/12/2022
-               TIME: 05:30:25
+               TIME: 05:41:35
 ___________________________
 QTY DESCRIPTION  PRICE  TOTAL
  5  Tea          $0,80  $4,00 
@@ -13,4 +13,4 @@ discount: 10%
  4  T-shirt      $3,00  $12,00 
 Card №1234, card discount = 5%
 Total discount:         $1,75
-TOTAL:                  $35,00
+TOTAL:                  $33,25
