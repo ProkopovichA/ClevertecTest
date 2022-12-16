@@ -1,4 +1,6 @@
-package model;
+package db;
+
+import model.DiscountCard;
 
 import java.util.ArrayList;
 import java.util.Iterator;

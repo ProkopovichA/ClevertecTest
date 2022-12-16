@@ -1,7 +1,5 @@
 package db;
 
-import model.BaseOfCard;
-import model.BaseOfProduct;
 import model.DiscountCard;
 import model_builder.ClothingProductBuilder;
 import model_builder.FoodProductBuilder;

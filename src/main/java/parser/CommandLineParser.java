@@ -2,8 +2,8 @@ package parser;
 
 import check.Check;
 import check.CheckLine;
-import model.BaseOfCard;
-import model.BaseOfProduct;
+import db.BaseOfCard;
+import db.BaseOfProduct;
 import model.DiscountCard;
 import model.Product;
 

@@ -3,7 +3,7 @@
   12, MILKYWAY, Galaxy/ Earth
      Tel :123-456-7890
 CASHIER: №1520 DATE: 16/12/2022
-               TIME: 05:22:07
+               TIME: 05:30:25
 ___________________________
 QTY DESCRIPTION  PRICE  TOTAL
  5  Tea          $0,80  $4,00 

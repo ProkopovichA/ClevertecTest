@@ -1,8 +1,8 @@
 import check.Check;
 import db.DataBaseWorker;
 import db.InitDataBase;
-import model.BaseOfCard;
-import model.BaseOfProduct;
+import db.BaseOfCard;
+import db.BaseOfProduct;
 import parser.CommandLineParser;
 import util.SaveToFile;
 
