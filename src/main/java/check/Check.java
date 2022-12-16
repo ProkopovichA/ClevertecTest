@@ -44,9 +44,11 @@ public class Check {
             }
             checkLine.calculate();
             total = total + checkLine.getTotal();
+            totalWithDiscount = total;
         }
         if (discountCard != null) {
             totalDiscount = total / 100 * discountCard.getCardDiscount();
+            totalWithDiscount = total - totalDiscount;
         }
     }
 
@@ -67,7 +69,7 @@ public class Check {
             printArr.add(discountCard.toString());
             printArr.add(String.format("Total discount:         $%.2f", totalDiscount));
         }
-        printArr.add(String.format("TOTAL:                  $%.2f", total));
+        printArr.add(String.format("TOTAL:                  $%.2f", totalWithDiscount));
         return printArr;
     }
 }
