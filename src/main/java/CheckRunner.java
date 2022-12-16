@@ -1,22 +1,17 @@
 import check.Check;
-import db.DataBaseWorker;
 import db.InitDataBase;
-import db.BaseOfCard;
-import db.BaseOfProduct;
 import parser.CommandLineParser;
 import util.SaveToFile;
 
 public class CheckRunner {
     public static void main(String[] args) {
-        BaseOfCard baseOfCard = new BaseOfCard();
-        BaseOfProduct baseOfProduct = new BaseOfProduct();
-        InitDataBase.Init(baseOfCard, baseOfProduct);
+        InitDataBase.init();
         Check check = new Check();
-        CommandLineParser.parse(args, check, baseOfProduct, baseOfCard);
+        CommandLineParser.parse(args, check);
         check.calculate();
         check.printCheck().forEach(System.out::println);
         SaveToFile.saveCheckToFile("Check.txt",check.printCheck());
-        DataBaseWorker.DataWrite("BaseOfCard","BaseOfProduct",baseOfCard,baseOfProduct);
+
     }
 
 

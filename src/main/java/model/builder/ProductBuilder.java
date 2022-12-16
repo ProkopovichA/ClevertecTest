@@ -1,4 +1,4 @@
-package model_builder;
+package model.builder;
 
 public interface ProductBuilder {
     void setId(int id);

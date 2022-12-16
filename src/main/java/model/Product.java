@@ -1,6 +1,8 @@
 package model;
 
-public abstract class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private String description;
     private int id;
     private double price;

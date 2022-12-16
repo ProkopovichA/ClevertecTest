@@ -1,9 +1,9 @@
-package model_builder;
+package model.builder;
+
 
 import model.Product;
-import model.ClothingProduct;
 
-public class ClothingProductBuilder implements ProductBuilder {
+public class ProductObjectBuilder implements ProductBuilder {
     private String description;
     private int id;
     private double price;
@@ -23,13 +23,12 @@ public class ClothingProductBuilder implements ProductBuilder {
     public void setPrice(double price) {
         this.price = price;
     }
-
     @Override
     public void setDiscount(boolean discount) {
         this.isDiscount = discount;
     }
 
     public Product buildProduct() {
-        return new ClothingProduct(description, id, price, isDiscount);
+        return new Product(description, id, price, isDiscount);
     }
 }

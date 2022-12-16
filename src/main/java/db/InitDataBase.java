@@ -1,80 +1,104 @@
 package db;
 
 import model.DiscountCard;
-import model_builder.ClothingProductBuilder;
-import model_builder.FoodProductBuilder;
+import model.builder.ProductObjectBuilder;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class InitDataBase {
-    public static void Init(BaseOfCard baseOfCard, BaseOfProduct baseOfProduct) {
 
-        DataBaseWorker.DataRead("BaseOfCard","BaseOfProduct",baseOfCard,baseOfProduct);
+    public static boolean isFileExists(String fileName) {
+        File file = new File(fileName);
+        return file.exists() && !file.isDirectory();
+    }
+
+    public static void init() {
+
+        if (!isFileExists("product.data")) {
+            try (final FileOutputStream fos = new FileOutputStream("product.data", true);
+                 final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 
 
-        FoodProductBuilder foodProductBuilder = new FoodProductBuilder();
-        foodProductBuilder.setId(baseOfProduct.getFreeId());
-        foodProductBuilder.setDescription("Milk");
-        foodProductBuilder.setPrice(1.2);
-        foodProductBuilder.setDiscount(false);
-        baseOfProduct.addProduct(foodProductBuilder.buildProduct());
+                int productId = 1;
+                ProductObjectBuilder productObjectBuilder = new ProductObjectBuilder();
+                productObjectBuilder.setId(productId++);
+                productObjectBuilder.setDescription("Milk");
+                productObjectBuilder.setPrice(1.2);
+                productObjectBuilder.setDiscount(false);
+                oos.writeObject(productObjectBuilder.buildProduct());
 
-        foodProductBuilder.setId(baseOfProduct.getFreeId());
-        foodProductBuilder.setDescription("Apple");
-        foodProductBuilder.setPrice(0.5);
-        foodProductBuilder.setDiscount(true);
-        baseOfProduct.addProduct(foodProductBuilder.buildProduct());
+                productObjectBuilder.setId(productId++);
+                productObjectBuilder.setDescription("Apple");
+                productObjectBuilder.setPrice(0.5);
+                productObjectBuilder.setDiscount(true);
+                oos.writeObject(productObjectBuilder.buildProduct());
 
-        foodProductBuilder.setId(baseOfProduct.getFreeId());
-        foodProductBuilder.setDescription("Meat");
-        foodProductBuilder.setPrice(2);
-        foodProductBuilder.setDiscount(false);
-        baseOfProduct.addProduct(foodProductBuilder.buildProduct());
+                productObjectBuilder.setId(productId++);
+                productObjectBuilder.setDescription("Meat");
+                productObjectBuilder.setPrice(2);
+                productObjectBuilder.setDiscount(false);
+                oos.writeObject(productObjectBuilder.buildProduct());
 
-        foodProductBuilder.setId(baseOfProduct.getFreeId());
-        foodProductBuilder.setDescription("Tea");
-        foodProductBuilder.setPrice(0.8);
-        foodProductBuilder.setDiscount(true);
-        baseOfProduct.addProduct(foodProductBuilder.buildProduct());
+                productObjectBuilder.setId(productId++);
+                productObjectBuilder.setDescription("Tea");
+                productObjectBuilder.setPrice(0.8);
+                productObjectBuilder.setDiscount(true);
+                oos.writeObject(productObjectBuilder.buildProduct());
 
-        foodProductBuilder.setId(baseOfProduct.getFreeId());
-        foodProductBuilder.setDescription("Chocolate");
-        foodProductBuilder.setPrice(1);
-        foodProductBuilder.setDiscount(true);
-        baseOfProduct.addProduct(foodProductBuilder.buildProduct());
+                productObjectBuilder.setId(productId++);
+                productObjectBuilder.setDescription("Chocolate");
+                productObjectBuilder.setPrice(1);
+                productObjectBuilder.setDiscount(true);
+                oos.writeObject(productObjectBuilder.buildProduct());
 
-        ClothingProductBuilder clothingProductBuilder = new ClothingProductBuilder();
-        clothingProductBuilder.setId(baseOfProduct.getFreeId());
-        clothingProductBuilder.setDescription("Red hat");
-        clothingProductBuilder.setPrice(10);
-        clothingProductBuilder.setDiscount(false);
-        baseOfProduct.addProduct(clothingProductBuilder.buildProduct());
 
-        clothingProductBuilder.setId(baseOfProduct.getFreeId());
-        clothingProductBuilder.setDescription("Black hat");
-        clothingProductBuilder.setPrice(10);
-        clothingProductBuilder.setDiscount(true);
-        baseOfProduct.addProduct(clothingProductBuilder.buildProduct());
+                productObjectBuilder.setId(productId++);
+                productObjectBuilder.setDescription("Red hat");
+                productObjectBuilder.setPrice(10);
+                productObjectBuilder.setDiscount(false);
+                oos.writeObject(productObjectBuilder.buildProduct());
 
-        clothingProductBuilder.setId(baseOfProduct.getFreeId());
-        clothingProductBuilder.setDescription("T-shirt");
-        clothingProductBuilder.setPrice(3);
-        clothingProductBuilder.setDiscount(false);
-        baseOfProduct.addProduct(clothingProductBuilder.buildProduct());
+                productObjectBuilder.setId(productId++);
+                productObjectBuilder.setDescription("Black hat");
+                productObjectBuilder.setPrice(10);
+                productObjectBuilder.setDiscount(true);
+                oos.writeObject(productObjectBuilder.buildProduct());
 
-        clothingProductBuilder.setId(baseOfProduct.getFreeId());
-        clothingProductBuilder.setDescription("Jeans");
-        clothingProductBuilder.setPrice(15);
-        clothingProductBuilder.setDiscount(false);
-        baseOfProduct.addProduct(clothingProductBuilder.buildProduct());
+                productObjectBuilder.setId(productId++);
+                productObjectBuilder.setDescription("T-shirt");
+                productObjectBuilder.setPrice(3);
+                productObjectBuilder.setDiscount(false);
+                oos.writeObject(productObjectBuilder.buildProduct());
 
-        clothingProductBuilder.setId(baseOfProduct.getFreeId());
-        clothingProductBuilder.setDescription("Boots");
-        clothingProductBuilder.setPrice(20);
-        clothingProductBuilder.setDiscount(true);
-        baseOfProduct.addProduct(clothingProductBuilder.buildProduct());
+                productObjectBuilder.setId(productId++);
+                productObjectBuilder.setDescription("Jeans");
+                productObjectBuilder.setPrice(15);
+                productObjectBuilder.setDiscount(false);
+                oos.writeObject(productObjectBuilder.buildProduct());
 
-        for (int i = 0; i < 2000; i++) {
-            baseOfCard.addCard(new DiscountCard(i));
+                productObjectBuilder.setId(productId++);
+                productObjectBuilder.setDescription("Boots");
+                productObjectBuilder.setPrice(20);
+                productObjectBuilder.setDiscount(true);
+                oos.writeObject(productObjectBuilder.buildProduct());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
+        if (!isFileExists("discount_card.data")) {
+            try (final FileOutputStream fos = new FileOutputStream("discount_card.data", true);
+                 final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                for (int i = 0; i < 2000; i++) {
+                    oos.writeObject(new DiscountCard(i));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
 
 //        baseOfCard.printBase();
 //        baseOfProduct.printBase();
