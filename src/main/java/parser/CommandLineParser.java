@@ -2,18 +2,18 @@ package parser;
 
 import check.Check;
 import check.CheckLine;
-import db.FileDAO;
+import db.DAO;
 import model.DiscountCard;
 import model.Product;
 
 
 public class CommandLineParser {
-    public static void parse(String[] args, Check check) {
+    public static void parse(String[] args, Check check, DAO DaoObject) {
         for (String arg : args) {
             if (arg.contains("card")) {
                 int cardNumber = Integer.parseInt(arg.replace("card-",""));
                 //System.out.println("Find card № " + cardNumber);
-                DiscountCard card = FileDAO.getCard(cardNumber);
+                DiscountCard card = DaoObject.getCard(cardNumber);
                 if (card != null) {
                     check.setDiscountCard(card);
                 } else {
@@ -23,7 +23,7 @@ public class CommandLineParser {
                 int indexOfDash = arg.indexOf("-");
                 int productId = Integer.parseInt(arg.substring(0,indexOfDash));
                 int productQuantity = Integer.parseInt(arg.substring(indexOfDash + 1,arg.length()));
-                Product product = FileDAO.getProduct(productId);
+                Product product = DaoObject.getProduct(productId);
                 //System.out.println("Find product id " + productId + ", quantity: " + productQuantity);
                 if ((product != null) && (productQuantity > 0)) {
                     CheckLine checkLine = new CheckLine(product,productQuantity);

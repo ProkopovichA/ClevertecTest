@@ -2,8 +2,8 @@
       SUPERMARKET 123
   12, MILKYWAY, Galaxy/ Earth
      Tel :123-456-7890
-CASHIER: №1520 DATE: 16/12/2022
-               TIME: 11:40:09
+CASHIER: №1520 DATE: 17/12/2022
+               TIME: 11:29:13
 ___________________________
 QTY DESCRIPTION  PRICE  TOTAL
  5  Meat         $2,00  $10,00 
