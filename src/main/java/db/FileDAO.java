@@ -5,6 +5,7 @@ import model.DiscountCard;
 import model.Product;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public final class FileDAO implements DAO {
@@ -56,7 +57,7 @@ public final class FileDAO implements DAO {
              final ObjectInputStream ois = new ObjectInputStream(fis)) {
 
             int productCount = ois.readInt();
-            for (int i=0; i< productCount; i++) {
+            for (int i = 0; i < productCount; i++) {
                 product = (Product) ois.readObject();
                 if (product.getId() == idProduct) {
                     returnProduct = product;
@@ -77,7 +78,7 @@ public final class FileDAO implements DAO {
         try (final FileInputStream fis = new FileInputStream("discount_card.data");
              final ObjectInputStream ois = new ObjectInputStream(fis)) {
             int cardCount = ois.readInt();
-            for (int i=0; i< cardCount; i++) {
+            for (int i = 0; i < cardCount; i++) {
                 card = (DiscountCard) ois.readObject();
                 if (card.getCardNumber() == cardNumber) {
                     returnCard = card;
@@ -85,11 +86,44 @@ public final class FileDAO implements DAO {
                 }
             }
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
 
         return returnCard;
     }
 
+    @Override
+    public List<Product> getListProduct() {
+        List<Product> productList = new ArrayList<>();
 
+        try (final FileInputStream fis = new FileInputStream("product.data");
+             final ObjectInputStream ois = new ObjectInputStream(fis)) {
+
+            int productCount = ois.readInt();
+            for (int i = 0; i < productCount; i++) {
+                productList.add((Product) ois.readObject());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return productList;
+    }
+
+    @Override
+    public List<DiscountCard> getListCard() {
+        List<DiscountCard> cardList = new ArrayList<>();
+        DiscountCard returnCard = null;
+        try (final FileInputStream fis = new FileInputStream("discount_card.data");
+             final ObjectInputStream ois = new ObjectInputStream(fis)) {
+            int cardCount = ois.readInt();
+            for (int i = 0; i < cardCount; i++) {
+                cardList.add((DiscountCard) ois.readObject());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cardList;
+    }
 }

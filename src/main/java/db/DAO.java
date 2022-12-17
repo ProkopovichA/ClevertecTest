@@ -10,4 +10,8 @@ public interface DAO {
     public void addDiscountCardFromList(List<DiscountCard> cardList);
     public Product getProduct(int idProduct);
     public DiscountCard getCard(int cardNumber);
+
+    public List<Product> getListProduct();
+    public List<DiscountCard> getListCard();
+
 }

@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InitDataBase {
+public class FirstInitDataBase {
 
 
     public static boolean isFileExists(String fileName) {

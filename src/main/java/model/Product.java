@@ -48,11 +48,10 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "description='" + description + '\'' +
-                ", id=" + id +
-                ", price=" + price +
-                ", isDiscount=" + isDiscount +
-                '}';
+        return "Product " +
+                "description ='" + description + '\'' +
+                ", id =" + id +
+                ", price =" + price +
+                ", isDiscount =" + isDiscount;
     }
 }
