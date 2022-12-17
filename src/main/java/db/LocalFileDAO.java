@@ -1,6 +1,5 @@
 package db;
 
-
 import model.DiscountCard;
 import model.Product;
 import model.builder.ProductObjectBuilder;
@@ -53,8 +52,7 @@ public final class LocalFileDAO implements DAO {
 
     @Override
     public void createProducts(List<Product> products) {
-        try (final FileOutputStream fos = new FileOutputStream("product.data");
-             final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+        try (final FileOutputStream fos = new FileOutputStream("product.data"); final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeInt(products.size());
             for (Product p : products) {
                 oos.writeObject(p);
@@ -67,8 +65,7 @@ public final class LocalFileDAO implements DAO {
 
     @Override
     public void createDiscountCards(List<DiscountCard> cardList) {
-        try (final FileOutputStream fos = new FileOutputStream("discount_card.data");
-             final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+        try (final FileOutputStream fos = new FileOutputStream("discount_card.data"); final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeInt(cardList.size());
             for (DiscountCard card : cardList) {
                 oos.writeObject(card);
@@ -82,8 +79,7 @@ public final class LocalFileDAO implements DAO {
     public Product getProduct(int idProduct) {
         Product product;
         Product returnProduct = null;
-        try (final FileInputStream fis = new FileInputStream("product.data");
-             final ObjectInputStream ois = new ObjectInputStream(fis)) {
+        try (final FileInputStream fis = new FileInputStream("product.data"); final ObjectInputStream ois = new ObjectInputStream(fis)) {
 
             int productCount = ois.readInt();
             for (int i = 0; i < productCount; i++) {
@@ -104,8 +100,7 @@ public final class LocalFileDAO implements DAO {
     public DiscountCard getCard(int cardNumber) {
         DiscountCard card;
         DiscountCard returnCard = null;
-        try (final FileInputStream fis = new FileInputStream("discount_card.data");
-             final ObjectInputStream ois = new ObjectInputStream(fis)) {
+        try (final FileInputStream fis = new FileInputStream("discount_card.data"); final ObjectInputStream ois = new ObjectInputStream(fis)) {
             int cardCount = ois.readInt();
             for (int i = 0; i < cardCount; i++) {
                 card = (DiscountCard) ois.readObject();
@@ -125,8 +120,7 @@ public final class LocalFileDAO implements DAO {
     public List<Product> getProducts() {
         List<Product> productList = new ArrayList<>();
 
-        try (final FileInputStream fis = new FileInputStream("product.data");
-             final ObjectInputStream ois = new ObjectInputStream(fis)) {
+        try (final FileInputStream fis = new FileInputStream("product.data"); final ObjectInputStream ois = new ObjectInputStream(fis)) {
 
             int productCount = ois.readInt();
             for (int i = 0; i < productCount; i++) {
@@ -143,8 +137,7 @@ public final class LocalFileDAO implements DAO {
     public List<DiscountCard> getCards() {
         List<DiscountCard> cardList = new ArrayList<>();
         DiscountCard returnCard = null;
-        try (final FileInputStream fis = new FileInputStream("discount_card.data");
-             final ObjectInputStream ois = new ObjectInputStream(fis)) {
+        try (final FileInputStream fis = new FileInputStream("discount_card.data"); final ObjectInputStream ois = new ObjectInputStream(fis)) {
             int cardCount = ois.readInt();
             for (int i = 0; i < cardCount; i++) {
                 cardList.add((DiscountCard) ois.readObject());
