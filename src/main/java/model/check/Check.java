@@ -1,6 +1,7 @@
-package check;
+package model.check;
 
 import model.DiscountCard;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -49,7 +50,7 @@ public class Check {
     }
 
     public List<String> printCheck() {
-        List<String> printArr = new  ArrayList<>();
+        List<String> printArr = new ArrayList<>();
         printArr.add("        CASH RECEIPT");
         printArr.add("      SUPERMARKET 123");
         printArr.add("  12, MILKYWAY, Galaxy/ Earth");

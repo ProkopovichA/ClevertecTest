@@ -3,27 +3,56 @@ package db;
 
 import model.DiscountCard;
 import model.Product;
+import model.builder.ProductObjectBuilder;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class FileDAO implements DAO {
-    private static FileDAO instance;
+public final class LocalFileDAO implements DAO {
+    private static LocalFileDAO instance;
 
-    private FileDAO() {
+    private LocalFileDAO() {
+        if (!isFileExists("product.data")) {
+            List<Product> products = new ArrayList<>();
+            int productId = 1;
+            ProductObjectBuilder productObjectBuilder = new ProductObjectBuilder();
+            products.add(productObjectBuilder.setId(productId++).setDescription("Milk").setPrice(1.2).setDiscount(false).buildProduct());
+            products.add(productObjectBuilder.setId(productId++).setDescription("Apple").setPrice(0.5).setDiscount(true).buildProduct());
+            products.add(productObjectBuilder.setId(productId++).setDescription("Meat").setPrice(2).setDiscount(false).buildProduct());
+            products.add(productObjectBuilder.setId(productId++).setDescription("Tea").setPrice(0.8).setDiscount(true).buildProduct());
+            products.add(productObjectBuilder.setId(productId++).setDescription("Chocolate").setPrice(1).setDiscount(true).buildProduct());
+            products.add(productObjectBuilder.setId(productId++).setDescription("Red hat").setPrice(10).setDiscount(false).buildProduct());
+            products.add(productObjectBuilder.setId(productId++).setDescription("Black hat").setPrice(10).setDiscount(true).buildProduct());
+            products.add(productObjectBuilder.setId(productId++).setDescription("T-shirt").setPrice(3).setDiscount(false).buildProduct());
+            products.add(productObjectBuilder.setId(productId++).setDescription("Jeans").setPrice(15).setDiscount(false).buildProduct());
+            products.add(productObjectBuilder.setId(productId++).setDescription("Boots").setPrice(20).setDiscount(true).buildProduct());
+            createProducts(products);
+        }
 
+        if (!isFileExists("discount_card.data")) {
+            List<DiscountCard> cardList = new ArrayList<>();
+            for (int i = 0; i < 2000; i++) {
+                cardList.add(new DiscountCard(i));
+            }
+            createDiscountCards(cardList);
+        }
     }
 
-    public static FileDAO getInstance() {
+    public static LocalFileDAO getInstance() {
         if (instance == null) {
-            instance = new FileDAO();
+            instance = new LocalFileDAO();
         }
         return instance;
     }
 
+    private boolean isFileExists(String fileName) {
+        File file = new File(fileName);
+        return file.exists() && !file.isDirectory();
+    }
+
     @Override
-    public void addProductFromList(List<Product> products) {
+    public void createProducts(List<Product> products) {
         try (final FileOutputStream fos = new FileOutputStream("product.data");
              final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeInt(products.size());
@@ -37,7 +66,7 @@ public final class FileDAO implements DAO {
     }
 
     @Override
-    public void addDiscountCardFromList(List<DiscountCard> cardList) {
+    public void createDiscountCards(List<DiscountCard> cardList) {
         try (final FileOutputStream fos = new FileOutputStream("discount_card.data");
              final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeInt(cardList.size());
@@ -93,7 +122,7 @@ public final class FileDAO implements DAO {
     }
 
     @Override
-    public List<Product> getListProduct() {
+    public List<Product> getProducts() {
         List<Product> productList = new ArrayList<>();
 
         try (final FileInputStream fis = new FileInputStream("product.data");
@@ -111,7 +140,7 @@ public final class FileDAO implements DAO {
     }
 
     @Override
-    public List<DiscountCard> getListCard() {
+    public List<DiscountCard> getCards() {
         List<DiscountCard> cardList = new ArrayList<>();
         DiscountCard returnCard = null;
         try (final FileInputStream fis = new FileInputStream("discount_card.data");

@@ -1,4 +1,4 @@
-package check;
+package model.check;
 
 import model.Product;
 
@@ -17,7 +17,7 @@ public class CheckLine {
 
     public void calculate() {
         total = price * productQuantity;
-        total = total*(1-amountOfDiscount/100);
+        total = total * (1 - amountOfDiscount / 100);
     }
 
     public void setAmountOfDiscount(double amountOfDiscount) {
@@ -25,18 +25,18 @@ public class CheckLine {
     }
 
     public void print() {
-        System.out.printf(" %d  %-12s $%.2f  $%.2f \n",productQuantity,product.getDescription(),price,total);
+        System.out.printf(" %d  %-12s $%.2f  $%.2f \n", productQuantity, product.getDescription(), price, total);
         if (amountOfDiscount != 0) {
-            System.out.printf("discount: %.0f",amountOfDiscount);
+            System.out.printf("discount: %.0f", amountOfDiscount);
             System.out.println("%");
         }
     }
 
     @Override
     public String toString() {
-        String returnSting = String.format(" %d  %-12s $%.2f  $%.2f ",productQuantity,product.getDescription(),price,total);
+        String returnSting = String.format(" %d  %-12s $%.2f  $%.2f ", productQuantity, product.getDescription(), price, total);
         if (amountOfDiscount != 0) {
-            returnSting = returnSting + String.format("\ndiscount: %.0f",amountOfDiscount);
+            returnSting = returnSting + String.format("\ndiscount: %.0f", amountOfDiscount);
             returnSting = returnSting + "%";
         }
         return returnSting;

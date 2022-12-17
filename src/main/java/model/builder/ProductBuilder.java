@@ -1,8 +1,15 @@
 package model.builder;
 
+import model.Product;
+
 public interface ProductBuilder {
-    void setId(int id);
-    void setDescription(String description);
-    void setPrice(double price);
-    void setDiscount(boolean discount);
+    ProductBuilder setId(int id);
+
+    ProductBuilder setDescription(String description);
+
+    ProductBuilder setPrice(double price);
+
+    ProductBuilder setDiscount(boolean discount);
+
+    public Product buildProduct();
 }

@@ -10,24 +10,30 @@ public class ProductObjectBuilder implements ProductBuilder {
     private boolean isDiscount;
 
     @Override
-    public void setDescription(String description) {
+    public ProductBuilder setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     @Override
-    public void setId(int id) {
+    public ProductBuilder setId(int id) {
         this.id = id;
+        return this;
     }
 
     @Override
-    public void setPrice(double price) {
+    public ProductBuilder setPrice(double price) {
         this.price = price;
-    }
-    @Override
-    public void setDiscount(boolean discount) {
-        this.isDiscount = discount;
+        return this;
     }
 
+    @Override
+    public ProductBuilder setDiscount(boolean discount) {
+        this.isDiscount = discount;
+        return this;
+    }
+
+    @Override
     public Product buildProduct() {
         return new Product(description, id, price, isDiscount);
     }
