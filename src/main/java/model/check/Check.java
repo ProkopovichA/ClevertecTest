@@ -16,9 +16,17 @@ public class Check {
     private double totalDiscount;
     private double totalWithDiscount;
 
-    public Check() {
+    public Check(int checkNumber) {
         this.checkLines = new ArrayList<>();
-        this.checkNumber = 1520;
+        this.checkNumber = checkNumber;
+    }
+
+    public DiscountCard getDiscountCard() {
+        return discountCard;
+    }
+
+    public List<CheckLine> getCheckLines() {
+        return checkLines;
     }
 
     public void setDiscountCard(DiscountCard discountCard) {

@@ -27,7 +27,7 @@ public class CheckService {
     }
 
     public Check generateCheck(CheckRequest request, DAO daoObject) {
-        check = new Check();
+        check = new Check(1520);
         int cardNumber = request.cardNumber;
         if (cardNumber != -1) {
             DiscountCard card = daoObject.getCard(cardNumber);
