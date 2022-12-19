@@ -2,16 +2,11 @@ package service;
 
 import db.DAO;
 import db.LocalFileDAO;
-import model.Product;
 import model.check.Check;
 import model.check.CheckLine;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

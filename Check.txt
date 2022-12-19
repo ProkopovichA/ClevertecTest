@@ -3,7 +3,7 @@
   12, MILKYWAY, Galaxy/ Earth
      Tel :123-456-7890
 CASHIER: №1520 DATE: 19/12/2022
-               TIME: 04:47:53
+               TIME: 06:25:00
 ___________________________
 QTY DESCRIPTION  PRICE  TOTAL
  5  Apple        $0,50  $2,50 

@@ -77,4 +77,8 @@ public class Check {
         printArr.add(String.format("TOTAL:                  $%.2f", totalWithDiscount));
         return printArr;
     }
+
+    public double getTotal() {
+        return total;
+    }
 }
