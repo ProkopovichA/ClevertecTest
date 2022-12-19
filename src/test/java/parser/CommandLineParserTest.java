@@ -15,15 +15,15 @@ public class CommandLineParserTest {
     @Test
     public void parse() {
 
-            String[] args = new String[8];
-            args[0] = "3-5";
-            args[1] = "2-5";
-            args[2] = "6-1";
-            args[3] = "7-4";
-            args[4] = "8-1";
-            args[5] = "12-10";
-            args[6] = "card-1234";
-            args[7] = "fileName-product.data";
+        String[] args = new String[8];
+        args[0] = "3-5";
+        args[1] = "2-5";
+        args[2] = "6-1";
+        args[3] = "7-4";
+        args[4] = "8-1";
+        args[5] = "12-10";
+        args[6] = "card-1234";
+        args[7] = "fileName-product.data";
 
         CheckRequest checkRequestResult = CommandLineParser.parse(args);
 
@@ -38,10 +38,9 @@ public class CommandLineParserTest {
         productQuantityMap.put(12, 10);
         CheckRequest checkRequestActual = new CheckRequest(cardNumber, productQuantityMap, fileName);
 
-        Assert.assertEquals(checkRequestResult.cardNumber,checkRequestActual.cardNumber);
-        Assert.assertEquals(checkRequestResult.productsQuantity,checkRequestActual.productsQuantity);
-        Assert.assertEquals(checkRequestResult.fileName,checkRequestActual.fileName);
-
+        Assert.assertEquals(checkRequestResult.cardNumber, checkRequestActual.cardNumber);
+        Assert.assertEquals(checkRequestResult.productsQuantity, checkRequestActual.productsQuantity);
+        Assert.assertEquals(checkRequestResult.fileName, checkRequestActual.fileName);
 
 
     }

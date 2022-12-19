@@ -5,6 +5,7 @@ import db.LocalFileDAO;
 import model.check.Check;
 import model.check.CheckLine;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -14,7 +15,6 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 public class CheckServiceTest {
-
 
 
     @Test
@@ -33,7 +33,7 @@ public class CheckServiceTest {
 
         DAO daoObject = LocalFileDAO.getInstance();
         CheckService service = CheckService.getInstance();
-        Check check = service.generateCheck(checkRequest,daoObject);
+        Check check = service.generateCheck(checkRequest, daoObject);
 
         Assert.assertEquals(check.getDiscountCard().getCardNumber(), cardNumber);
 
@@ -51,8 +51,38 @@ public class CheckServiceTest {
 
         }
 
+    }
+
+    @Test
+    public void printDataBase() {
+        Map<Integer, Integer> productQuantityMap = new HashMap<>();
+        int cardNumber = 1234;
+        String fileName = "product.data";
+        productQuantityMap.put(3, 5);
+        productQuantityMap.put(2, 5);
+        productQuantityMap.put(6, 1);
+        productQuantityMap.put(7, 4);
+        productQuantityMap.put(8, 1);
 
 
+        CheckRequest checkRequest = new CheckRequest(cardNumber, productQuantityMap, fileName);
+
+        DAO daoObject = LocalFileDAO.getInstance();
+        CheckService service = CheckService.getInstance();
+
+
+        List<String> listOfDataBaseRecords = service.printDataBase(checkRequest, daoObject);
+
+        int sizeOfList = listOfDataBaseRecords.size();
+        Assert.assertNotEquals(sizeOfList, 0);
+
+        fileName = "discount_card.data";
+        checkRequest = new CheckRequest(cardNumber, productQuantityMap, fileName);
+
+        listOfDataBaseRecords = service.printDataBase(checkRequest, daoObject);
+
+        sizeOfList = listOfDataBaseRecords.size();
+        Assert.assertNotEquals(sizeOfList, 0);
 
     }
 

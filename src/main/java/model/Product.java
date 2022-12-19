@@ -14,7 +14,6 @@ public class Product implements Serializable {
         this.price = price;
         this.isDiscount = discount;
     }
-
     public int getId() {
         return id;
     }
