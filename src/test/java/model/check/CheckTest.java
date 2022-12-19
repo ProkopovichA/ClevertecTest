@@ -40,6 +40,19 @@ public class CheckTest {
         check.calculate();
 
         Assert.assertEquals(18.8, check.getTotal(), 0);
+    }
+
+    @Test
+    public void printCheck(){
+        Check check = new Check(1520);
+
+        Product product = new Product("apple", 1, 2.5, true);
+        CheckLine checkLine = new CheckLine(product, 5);
+        check.addProductToCheck(checkLine);
+
+        product = new Product("milk", 2, 0.7, true);
+        checkLine = new CheckLine(product, 10);
+        check.addProductToCheck(checkLine);
 
         DiscountCard card = new DiscountCard(777);
         check.setDiscountCard(card);
@@ -48,6 +61,7 @@ public class CheckTest {
         int sizeOfList = listOfCheckInfo.size();
         Assert.assertNotEquals(sizeOfList, 0);
     }
+
 
 
 }
