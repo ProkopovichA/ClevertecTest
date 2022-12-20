@@ -7,12 +7,39 @@ import model.builder.ProductObjectBuilder;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public final class LocalFileDAO implements DAO {
     private static LocalFileDAO instance;
+    private static String fileNameProduct;
+    private static String fileNameCard;
 
     private LocalFileDAO() {
-        if (!isFileExists("product.data")) {
+        try (InputStream is = getClass().getResourceAsStream("/application.properties")) {
+            Properties props = new Properties();
+            props.load(is);
+            fileNameProduct = props.getProperty("products.file.name");
+            fileNameCard = props.getProperty("cards.file.name");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        initTestData();
+    }
+
+    public static LocalFileDAO getInstance() {
+        if (instance == null) {
+            instance = new LocalFileDAO();
+        }
+        return instance;
+    }
+
+    private boolean isFileExists(String fileName) {
+        File file = new File(fileName);
+        return file.exists() && !file.isDirectory();
+    }
+
+    private void initTestData() {
+        if (!isFileExists(fileNameProduct)) {
             List<Product> products = new ArrayList<>();
             int productId = 1;
             ProductObjectBuilder productObjectBuilder = new ProductObjectBuilder();
@@ -29,7 +56,7 @@ public final class LocalFileDAO implements DAO {
             createProducts(products);
         }
 
-        if (!isFileExists("discount_card.data")) {
+        if (!isFileExists(fileNameCard)) {
             List<DiscountCard> cardList = new ArrayList<>();
             for (int i = 0; i < 2000; i++) {
                 cardList.add(new DiscountCard(i));
@@ -38,26 +65,14 @@ public final class LocalFileDAO implements DAO {
         }
     }
 
-    public static LocalFileDAO getInstance() {
-        if (instance == null) {
-            instance = new LocalFileDAO();
-        }
-        return instance;
-    }
-
-    private boolean isFileExists(String fileName) {
-        File file = new File(fileName);
-        return file.exists() && !file.isDirectory();
-    }
-
     @Override
     public void createProducts(List<Product> products) {
-        try (final FileOutputStream fos = new FileOutputStream("product.data"); final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+        try (final FileOutputStream fos = new FileOutputStream(fileNameProduct);
+             final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeInt(products.size());
             for (Product p : products) {
                 oos.writeObject(p);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,7 +80,8 @@ public final class LocalFileDAO implements DAO {
 
     @Override
     public void createDiscountCards(List<DiscountCard> cardList) {
-        try (final FileOutputStream fos = new FileOutputStream("discount_card.data"); final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+        try (final FileOutputStream fos = new FileOutputStream(fileNameCard);
+             final ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeInt(cardList.size());
             for (DiscountCard card : cardList) {
                 oos.writeObject(card);
@@ -79,7 +95,8 @@ public final class LocalFileDAO implements DAO {
     public Product getProduct(int idProduct) {
         Product product;
         Product returnProduct = null;
-        try (final FileInputStream fis = new FileInputStream("product.data"); final ObjectInputStream ois = new ObjectInputStream(fis)) {
+        try (final FileInputStream fis = new FileInputStream(fileNameProduct);
+             final ObjectInputStream ois = new ObjectInputStream(fis)) {
 
             int productCount = ois.readInt();
             for (int i = 0; i < productCount; i++) {
@@ -89,8 +106,10 @@ public final class LocalFileDAO implements DAO {
                     break;
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.err.printf("Error reading file %s. Check the filename in the configuration. \n",fileNameProduct);;
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return returnProduct;
@@ -100,7 +119,8 @@ public final class LocalFileDAO implements DAO {
     public DiscountCard getCard(int cardNumber) {
         DiscountCard card;
         DiscountCard returnCard = null;
-        try (final FileInputStream fis = new FileInputStream("discount_card.data"); final ObjectInputStream ois = new ObjectInputStream(fis)) {
+        try (final FileInputStream fis = new FileInputStream(fileNameCard);
+             final ObjectInputStream ois = new ObjectInputStream(fis)) {
             int cardCount = ois.readInt();
             for (int i = 0; i < cardCount; i++) {
                 card = (DiscountCard) ois.readObject();
@@ -109,8 +129,10 @@ public final class LocalFileDAO implements DAO {
                     break;
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.err.printf("Error reading file %s. Check the filename in the configuration. \n",fileNameCard);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return returnCard;
@@ -120,14 +142,17 @@ public final class LocalFileDAO implements DAO {
     public List<Product> getProducts() {
         List<Product> productList = new ArrayList<>();
 
-        try (final FileInputStream fis = new FileInputStream("product.data"); final ObjectInputStream ois = new ObjectInputStream(fis)) {
+        try (final FileInputStream fis = new FileInputStream(fileNameProduct);
+             final ObjectInputStream ois = new ObjectInputStream(fis)) {
 
             int productCount = ois.readInt();
             for (int i = 0; i < productCount; i++) {
                 productList.add((Product) ois.readObject());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.err.printf("Error reading file %s. Check the filename in the configuration. \n",fileNameProduct);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return productList;
@@ -137,13 +162,16 @@ public final class LocalFileDAO implements DAO {
     public List<DiscountCard> getCards() {
         List<DiscountCard> cardList = new ArrayList<>();
         DiscountCard returnCard = null;
-        try (final FileInputStream fis = new FileInputStream("discount_card.data"); final ObjectInputStream ois = new ObjectInputStream(fis)) {
+        try (final FileInputStream fis = new FileInputStream(fileNameCard);
+             final ObjectInputStream ois = new ObjectInputStream(fis)) {
             int cardCount = ois.readInt();
             for (int i = 0; i < cardCount; i++) {
                 cardList.add((DiscountCard) ois.readObject());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.err.printf("Error reading file %s. Check the filename in the configuration. \n",fileNameCard);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return cardList;

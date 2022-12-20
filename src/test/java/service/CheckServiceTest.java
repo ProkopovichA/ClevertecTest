@@ -5,14 +5,11 @@ import db.LocalFileDAO;
 import model.check.Check;
 import model.check.CheckLine;
 import org.junit.Assert;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.Assert.*;
 
 public class CheckServiceTest {
 
@@ -54,7 +51,7 @@ public class CheckServiceTest {
     }
 
     @Test
-    public void printDataBase() {
+    public void getDataBaseForPrint() {
         Map<Integer, Integer> productQuantityMap = new HashMap<>();
         int cardNumber = 1234;
         String fileName = "product.data";
@@ -71,7 +68,7 @@ public class CheckServiceTest {
         CheckService service = CheckService.getInstance();
 
 
-        List<String> listOfDataBaseRecords = service.printDataBase(checkRequest, daoObject);
+        List<String> listOfDataBaseRecords = service.getDataBaseForPrint(checkRequest, daoObject);
 
         int sizeOfList = listOfDataBaseRecords.size();
         Assert.assertNotEquals(sizeOfList, 0);
@@ -79,7 +76,7 @@ public class CheckServiceTest {
         fileName = "discount_card.data";
         checkRequest = new CheckRequest(cardNumber, productQuantityMap, fileName);
 
-        listOfDataBaseRecords = service.printDataBase(checkRequest, daoObject);
+        listOfDataBaseRecords = service.getDataBaseForPrint(checkRequest, daoObject);
 
         sizeOfList = listOfDataBaseRecords.size();
         Assert.assertNotEquals(sizeOfList, 0);

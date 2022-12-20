@@ -54,7 +54,7 @@ public class CheckService {
         return check;
     }
 
-    public List<String> printDataBase(CheckRequest request, DAO daoObject) {
+    public List<String> getDataBaseForPrint(CheckRequest request, DAO daoObject) {
         List<String> printArr = new ArrayList<>();
         String fileName = request.fileName;
         if (fileName.equals("product.data")) {

@@ -57,7 +57,7 @@ public class Check {
         }
     }
 
-    public List<String> printCheck() {
+    public List<String> getCheckForPrint() {
         List<String> printArr = new ArrayList<>();
         printArr.add("        CASH RECEIPT");
         printArr.add("      SUPERMARKET 123");

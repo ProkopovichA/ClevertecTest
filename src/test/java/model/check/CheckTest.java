@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class CheckTest {
 
     @Test
@@ -56,7 +54,7 @@ public class CheckTest {
 
         DiscountCard card = new DiscountCard(777);
         check.setDiscountCard(card);
-        List<String> listOfCheckInfo = check.printCheck();
+        List<String> listOfCheckInfo = check.getCheckForPrint();
 
         int sizeOfList = listOfCheckInfo.size();
         Assert.assertNotEquals(sizeOfList, 0);

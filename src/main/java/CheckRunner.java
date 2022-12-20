@@ -13,9 +13,9 @@ public class CheckRunner {
         CheckRequest request = CommandLineParser.parse(args);
         CheckService service = CheckService.getInstance();
         Check check = service.generateCheck(request,daoObject);
-        service.printDataBase(request,daoObject).forEach(System.out::println);
-        check.printCheck().forEach(System.out::println);
-        SaveToFile.saveListToFile("Check.txt",check.printCheck());
+        service.getDataBaseForPrint(request,daoObject).forEach(System.out::println);
+        check.getCheckForPrint().forEach(System.out::println);
+        SaveToFile.saveListToFile("Check.txt",check.getCheckForPrint());
     }
 
 
